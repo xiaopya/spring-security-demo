@@ -1,0 +1,16 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: spring-security-demo
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/long
+    username: root
+    password: 962464
+
+mybatis-plus:
+  configuration:
+    #sql??
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
