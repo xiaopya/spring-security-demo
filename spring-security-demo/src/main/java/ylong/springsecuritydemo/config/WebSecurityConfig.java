@@ -29,13 +29,24 @@ public class WebSecurityConfig {
                         // 已认证的请求会被自动授权
                         .authenticated()
                 )
+                .formLogin(form->
+                        form
+                                .permitAll()
+                                .successHandler(new MyAuthenticationSuccessHandler()) // 认证成功的处理
+                                .failureHandler(new MyAuthenticationFailureHandler()) // 认证失败的处理
+//                                .usernameParameter("myUsername") // 配置自定义表单参数 默认：username
+//                                .passwordParameter("myPassword") // 配置自定义表单参数 默认：password
+                )
                 // 使用表单授权方式
                 .formLogin(withDefaults());
                 // 使用基本授权方式（浏览器自带的原始登陆方式）
                 //.httpBasic(withDefaults());
 
+        // 开启跨域
+        http.cors(withDefaults());
+
         // TODO 先临时关闭csrf攻击防御
-        http.csrf(AbstractHttpConfigurer::disable);
+//        http.csrf(AbstractHttpConfigurer::disable);
         return http.build();
     }
 
